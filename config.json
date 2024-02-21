@@ -1,0 +1,12 @@
+{
+  "devUrl": "http://ready-for-feedback3.com/internship/tsarkov/gjz",
+  "themeName": "gjz",
+  "proxyUrl": "http://localhost:3000",
+  "open": true,
+  "bsWatchFiles": [
+    "inc/**/*.php",
+    "parts/**/*.php",
+    "templates/**/*.php",
+    "assets/**/*.js"
+  ]
+}

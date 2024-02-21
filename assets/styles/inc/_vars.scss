@@ -1,0 +1,60 @@
+/* ---------------------------------------
+	Project variables
+--------------------------------------- */
+
+$black: #221f1f;
+$dark-gunmetal: #1b1e29;
+$devys-grey: #4c4f5c;
+$black-coral: #565966;
+$roman-silver: #858a96;
+$metallic-silver: #a1a7b4;
+$lavender: #e7eafa;
+$lotion: #fcfcfc;
+$white: #fff;
+
+$primary-color: $dark-gunmetal;
+$sub-color: $roman-silver;
+
+$text-color: $black-coral;
+
+$font: 'Josefin Sans', Helvetica, Roboto, Arial, sans-serif;
+$fa: 'Font Awesome 6 Free';
+
+//Masonty grid layout
+$masonry-grid-column-gap: 35px;
+$masonry-grid-row-gap: 50px;
+
+//Post block
+$post-block-featured-img-bg: $black-coral;
+$post-block-featured-img-opacity: 0.8;
+
+//Font sizing
+$name-weights: 100, 150, 200, 250, 300, 350, 400, 450, 500, 550;
+$sizes: 12px, 14px, 16px, 18px, 20px, 22px, 24px, 26px, 30px, 36px;
+
+/* ---------------------------------------
+	Font Awesome Vars
+--------------------------------------- */
+//$fa-font-display: swap;
+
+/* ---------------------------------------
+	Project mixins
+--------------------------------------- */
+@for $i from 1 through length($sizes) {
+  $name-weight: nth($name-weights, $i);
+  $size: nth($sizes, $i);
+  .font-size-#{$name-weight} {
+    font-size: #{$size};
+  }
+}
+
+/* ---------------------------------------
+	Custom fonts
+--------------------------------------- */
+:root {
+  --content-size: 1400px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
