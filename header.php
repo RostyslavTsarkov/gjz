@@ -32,7 +32,7 @@
 <header class="header">
     <div class="grid-container menu-grid-container">
         <div class="grid-x grid-margin-x">
-            <div class="large-4 medium-3 small-9 cell medium-order-1 small-order-1">
+            <div class="large-4 medium-9 small-9 cell large-order-1 medium-order-1 small-order-1">
                 <div class="logo text-center medium-text-left">
                     <div class="grid-x column-gap-35 align-middle">
                         <div class="grid-x align-middle column-gap-20">
@@ -43,8 +43,8 @@
                     </div>
                 </div>
             </div>
-            <div class="large-7 medium-7 small-12 cell medium-order-2 small-order-3">
-                <div class="grid-x align-center">
+            <div class="large-6 medium-12 small-12 cell large-order-2 medium-order-3 small-order-3">
+                <div class="grid-x align-right medium-align-center">
                     <?php if (has_nav_menu('header-menu')) : ?>
                         <div class="title-bar hide-for-medium" data-responsive-toggle="main-menu" data-hide-for="medium">
                             <button class="menu-icon" type="button" data-toggle aria-label="Menu" aria-controls="main-menu">
@@ -61,12 +61,12 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="large-1 medium-2 small-3 cell medium-order-3 small-order-2">
+            <div class="large-2 medium-3 small-3 cell large-order-3 medium-order-2 small-order-2">
                 <div class="grid-x align-right">
                     <?php if (have_rows('site_languages', 'options')) : ?>
                         <?php while (have_rows('site_languages', 'options')) :
                             the_row() ?>
-                                <ul class="cell">
+                                <ul class="">
                                     <?php $divider = get_sub_field('divider'); ?>
                                     <?php if (have_rows('languages')) : ?>
                                         <?php while (have_rows('languages')) :
@@ -76,7 +76,9 @@
                                                 <?php else : ?>
                                                     <span class="font-size-100 roman-silver"><?php the_sub_field('short_name'); ?></span>
                                                 <?php endif; ?>
-                                                <span class="font-size-100 roman-silver"><?php echo $divider; ?></span>
+                                                <?php if ('zh' != get_sub_field('short_name')) : ?>
+                                                    <span class="font-size-100 roman-silver"><?php echo $divider; ?></span>
+                                                <?php endif; ?>
                                         <?php endwhile; ?>
                                     <?php endif; ?>
                                 </ul>
