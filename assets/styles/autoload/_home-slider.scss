@@ -34,21 +34,25 @@
     font-size: 0;
 
     li {
+      height: 16px;
+      width: 16px;
+
       &:only-child {
         display: none;
       }
 
       button {
         &::before {
-          border: 2px solid $primary-color;
-          background-color: transparent;
+          border: 1px solid $lavender;
+          background-color: $black-coral;
         }
       }
 
       &.slick-active {
         button {
           &::before {
-            background-color: $primary-color;
+            border: 1px solid $black-coral;
+            background-color: $lavender;
           }
         }
       }
@@ -78,11 +82,11 @@
   border-bottom: 1px solid $primary-color;
 
   @include breakpoint(medium down) {
-    height: 400px;
+    height: 500px;
   }
 
   @include breakpoint(small down) {
-    height: 300px;
+    height: 400px;
   }
 
   &__inner {
@@ -95,9 +99,22 @@
   &__caption {
     //@include absolute-center;
 
-    .grid-x {
+    :hover {
+      background: $lavender;
+      color: $black-coral;
+    }
+
+    .slide__post-link {
       height: 100%;
       padding-block: 25px;
+
+      @include breakpoint(medium down) {
+        padding-block: 15px;
+      }
+
+      @include breakpoint(small down) {
+        padding-block: 10px;
+      }
 
       * {
         margin: 0;
