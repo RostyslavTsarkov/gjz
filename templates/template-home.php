@@ -18,7 +18,7 @@ get_header(); ?>
             <div class="font-size-500 font-weight-300 black-coral"><?php the_field('about_description'); ?></div>
         </div>
         <div class="cell">
-            <div class="about__category-list grid-x grid-margin-x large-up-5 medium-up-3 small-up-1">
+            <div class="about__category-list grid-x grid-margin-x grid-margin-y medium-up-3 small-up-1">
                 <?php
                 $args = array(
                     'taxonomy'   => 'project-type',
