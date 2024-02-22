@@ -4,12 +4,12 @@
 $slick-font-family: $fa;
 $slick-prev-character: '\f104';
 $slick-next-character: '\f105';
-$slick-dot-character: '\f111';
+$slick-dot-character: '';
 $slick-arrow-color: $white;
 $slick-dot-color: $primary-color;
 $slick-dot-color-active: $lotion;
 $slick-dot-size: 1rem;
-$slick-arrow-size: 3rem;
+$slick-arrow-size: 2.75rem;
 
 @import '~slick-carousel/slick/slick.scss';
 @import '~slick-carousel/slick/slick-theme.scss';
@@ -18,6 +18,7 @@ $slick-arrow-size: 3rem;
 .slick-arrow {
   width: $slick-arrow-size / 2;
   height: $slick-arrow-size;
+  top: 45%;
   z-index: 1;
 
   &::before {
@@ -25,6 +26,7 @@ $slick-arrow-size: 3rem;
     font-size: $slick-arrow-size;
   }
 }
+
 .slick-prev {
   left: 1.5rem;
 }
@@ -39,10 +41,13 @@ $slick-arrow-size: 3rem;
 }
 
 .slick-dots {
-  left: -43%;
-  bottom: 16%;
+  padding-left: 35px;
+  bottom: 18%;
+  text-align: start;
 
   li {
+    margin-right: 10px;
+
     button {
       &::before {
         font-weight: 900;
