@@ -6,6 +6,7 @@ add_shortcode('projects-slider', function () {
     ?>
     <script type="text/javascript">
         jQuery(document).on('ready', function() {
+            var $homeSlider = jQuery('#home-slider');
             if (typeof jQuery('body').slick === 'function') {
                 $homeSlider.slick({
                     cssEase: 'ease',
@@ -40,13 +41,14 @@ add_shortcode('projects-slider', function () {
                 $slider->the_post(); ?>
                 <div class="slick-slide home-slide">
                     <div class="home-slide__inner" <?php bg(esc_url(get_field('project_slide_images')[0]['url']), 'full_hd'); ?>>
-                        <div class="grid-container home-slide__caption">
-                            <div class="grid-x grid-margin-x">
-                                <div class="cell">
-                                    <h3><?php the_title(); ?></h3>
-                                    <?php the_content(); ?>
-                                </div>
-                            </div>
+
+                    </div>
+                    <div class="home-slide__caption">
+                        <div class="grid-x">
+                            <a class="slide__post-link cell grid-x align-justify align-middle" href="<?php the_field('slide_post_link'); ?>">
+                                <h5 class="text-uppercase font-weight-300"><?php the_title(); ?></h5>
+                                <i class="arrow fa-solid fa-chevron-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
