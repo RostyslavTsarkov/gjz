@@ -4,6 +4,11 @@
 
 .about__category-list {
   margin-top: rem-calc(100);
+
+  @include breakpoint(medium down) {
+    row-gap: 20px;
+    justify-content: center;
+  }
 }
 
 .category-block {
@@ -14,6 +19,10 @@
   gap: 10px;
   align-items: start;
   justify-content: space-between;
+
+  a:hover {
+    background: $lavender;
+  }
 
   &__description {
     margin: 0;
@@ -42,5 +51,21 @@
     top: 50%;
     transform: translateY(-50%) rotateZ(25deg);
     border-left: 1px solid $roman-silver;
+  }
+
+  @include breakpoint(medium down) {
+    &:not(:last-child):after {
+      height: 175px;
+    }
+
+    &:last-child:after {
+      content: '';
+      height: 175px;
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%) rotateZ(25deg);
+      border-left: 1px solid $roman-silver;
+    }
   }
 }
