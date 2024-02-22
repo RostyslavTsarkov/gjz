@@ -262,9 +262,11 @@ add_shortcode('slider', function () {
                     </div>
 
                     <div class="home-slide__caption">
-                        <div class="grid-x align-justify align-middle">
-                            <h5 class="text-uppercase font-weight-300"><?php the_title(); ?></h5>
-                            <i class="arrow fa-solid fa-chevron-right"></i>
+                        <div class="grid-x">
+                            <a class="slide__post-link cell grid-x align-justify align-middle" href="<?php the_field('slide_post_link'); ?>">
+                                <h5 class="text-uppercase font-weight-300"><?php the_title(); ?></h5>
+                                <i class="arrow fa-solid fa-chevron-right"></i>
+                            </a>
                         </div>
                     </div>
 
