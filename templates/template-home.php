@@ -33,7 +33,6 @@ get_header(); ?>
                             <a href="<?php echo esc_url(get_term_link($term)); ?>">
                                 <h6 class="text-lowercase font-size-350 font-weight-700"><?php echo $term->name; ?></h6>
                             </a>
-                            </a>
                             <p class="category-block__description font-size-250 font-weight-300 black-coral"><?php echo $term->description; ?></p>
                             <a href="<?php echo esc_url(get_term_link($term)); ?>"
                                 class="font-size-300 fa-solid fa-chevron-right"></a>
