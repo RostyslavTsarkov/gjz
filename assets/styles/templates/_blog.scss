@@ -37,3 +37,29 @@
 .entry__cat {
   margin-top: 20px;
 }
+
+.term-list {
+  height: 80%;
+}
+
+/* ---------------------------------------
+	Projects page
+--------------------------------------- */
+
+.projects {
+  &__title-bar {
+    margin-bottom: rem-calc(20);
+  }
+
+  &__masonry-grid {
+    margin-top: rem-calc(60);
+  }
+}
+
+/* ---------------------------------------
+	Category info
+--------------------------------------- */
+
+.cell > .category-section {
+  height: 300px;
+}
