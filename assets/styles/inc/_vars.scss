@@ -28,9 +28,10 @@ $masonry-grid-row-gap: 50px;
 $post-block-featured-img-bg: $black-coral;
 $post-block-featured-img-opacity: 0.8;
 
-//Font sizing
+//Font
 $name-weights: 100, 150, 200, 250, 300, 350, 400, 450, 500, 550;
 $sizes: 12px, 14px, 16px, 18px, 20px, 22px, 24px, 26px, 30px, 36px;
+$weights: 200, 300, 400, 500, 600, 700, 800, 900;
 
 /* ---------------------------------------
 	Font Awesome Vars
@@ -45,6 +46,12 @@ $sizes: 12px, 14px, 16px, 18px, 20px, 22px, 24px, 26px, 30px, 36px;
   $size: nth($sizes, $i);
   .font-size-#{$name-weight} {
     font-size: #{$size};
+  }
+}
+
+@each $weight in $weights {
+  .font-weight-#{$weight} {
+    font-weight: #{$weight};
   }
 }
 
