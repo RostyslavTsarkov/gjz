@@ -1,7 +1,14 @@
 <?php
 
 // PROJECTS Slider Shortcode
-add_shortcode('projects-slider', function () {
+add_shortcode('projects-slider', 'featured_projects');
+
+function featured_projects($atts)
+{
+    $atts = shortcode_atts(array(
+        'term' => '',
+    ), $atts, 'projects-slider');
+
     ob_start();
     ?>
     <script type="text/javascript">
@@ -30,6 +37,13 @@ add_shortcode('projects-slider', function () {
     <?php
     $slider = new WP_Query([
         'post_type' => 'project',
+        'tax_query' => array(
+            array (
+                'taxonomy' => 'project-type',
+                'field' => 'slug',
+                'terms' => $atts['term'],
+            )
+        ),
         'order' => 'ASC',
         'orderby' => 'menu_order',
         'posts_per_page' => 5,
@@ -45,7 +59,8 @@ add_shortcode('projects-slider', function () {
                     </div>
                     <div class="home-slide__caption">
                         <div class="grid-x">
-                            <a class="slide__post-link cell grid-x align-justify align-middle" href="<?php the_field('slide_post_link'); ?>">
+                            <a class="slide__post-link cell grid-x align-justify align-middle"
+                               href="<?php the_permalink(); ?>">
                                 <h5 class="text-uppercase font-weight-300"><?php the_title(); ?></h5>
                                 <i class="arrow fa-solid fa-chevron-right"></i>
                             </a>
@@ -59,4 +74,4 @@ add_shortcode('projects-slider', function () {
     wp_reset_query();
 
     return ob_get_clean();
-});
+};
