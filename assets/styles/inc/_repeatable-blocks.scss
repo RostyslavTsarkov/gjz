@@ -115,11 +115,41 @@
 	Project block
 --------------------------------------- */
 .project-block {
+  padding: 0;
+
   &__featured-img--container {
     background-color: $post-block-featured-img-bg;
 
-    &__featured-img {
-      opacity: $post-block-featured-img-opacity;
+    .project-block__featured-img {
+      opacity: $post-block-featured-img-opacity !important;
     }
+  }
+
+  &__body {
+    padding-top: 20px;
+    padding-inline: 20px;
+
+    a:hover {
+      background: $lavender;
+    }
+  }
+}
+
+/* ---------------------------------------
+	Button
+--------------------------------------- */
+.button.download {
+  height: rem-calc(65);
+  width: rem-calc(250);
+  padding-inline: 25px;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  gap: 35px;
+
+  i {
+    margin-top: -5px;
   }
 }
