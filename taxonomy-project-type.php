@@ -4,7 +4,9 @@
  *
  * Standard loop for the archive page
  */
+
 get_header(); ?>
+
 <main class="main-content">
     <div class="grid-container">
         <div class="grid-x grid-margin-x">
@@ -49,53 +51,63 @@ get_header(); ?>
                 </div>
             </div>
 
+            <?php if ($term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'))) : ?>
             <!-- BEGIN of Featured posts slider -->
             <section class="cell">
                 <?php if (shortcode_exists('projects-slider')) {
-                    echo do_shortcode('[projects-slider]');
+                    echo do_shortcode('[projects-slider term="' . $term->slug . '"]');
                 } ?>
             </section>
             <!--END of Featured posts slider -->
 
             <!-- BEGIN of Category information -->
-            <section class="cell">
-                <?php if ($term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'))) : ?>
-                <div class="grid-x grid-margin-x">
-                    <div class="cell large-7">
-                        <div class="grid-y">
-                            <div class="cell">
-                                <?php echo $term->name; ?>
+            <section class="category-section cell">
+                <div class="grid-x row-gap-20">
+                    <div class="cell">
+                        <div class="grid-x grid-margin-x">
+                            <div class="cell large-7">
+                                <h3 class="category-section__title font-weight-500 text-uppercase"><?php echo $term->name; ?></h3>
                             </div>
-                            <?php if ($desctiption = get_field('category_long_description', $term)) : ?>
-                                <div class="cell">
-                                    <?php echo $desctiption; ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($button = get_field('category_download_button', $term)) : ?>
-                                <div class="cell">
-                                    <a class="button large" href="<?php $button['file'] ?>" download>
-                                        <i class="fa-solid fa-download"></i>
-                                        <?php echo $button['placeholder'] ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <div class="cell large-5">
-                        <div class="category-section grid-y grid-margin-y">
-                            <div class="">
-                                <div class="grid-y">
+                            <div class="cell large-5">
+                                <div class="grid-y align-right row-gap-10">
                                     <?php if ($add = get_field('category_additional_information', $term)) : ?>
-                                        <div class="cell">
-                                            <?php echo $add['title']; ?>
+                                        <div class="cell medium-offset-5 medium-7 font-size-150 font-weight-900">
+                                            <div class="grid-x align-right">
+                                                <?php echo $add['title']; ?>
+                                            </div>
                                         </div>
-                                        <div class="cell">
-                                            <?php echo $add['short_description']; ?>
+                                        <div class="cell large-offset-6 medium-offset-7 large-6 medium-5 roman-silver">
+                                            <div class="grid-x text-right align-right">
+                                                <?php echo $add['short_description']; ?>
+                                            </div>
                                         </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="cell rel-content">
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="grid-x grid-margin-x grid-margin-y">
+                            <div class="cell large-7 large-order-1 medium-order-2 small-order-2">
+                                <div class="grid-y rel-content row-gap-30">
+                                    <?php if ($description = get_field('category_long_description', $term)) : ?>
+                                        <div class="category-section__description cell font-size-450 font-weight-300">
+                                            <?php echo $description; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($button = get_field('category_download_button', $term)) : ?>
+                                        <div class="cell">
+                                            <div class="grid-x align-right medium-align-center">
+                                                <a class="button download text-uppercase" href="<?php $button['file'] ?>" download>
+                                                    <i class="fa-solid fa-download font-size-400"></i>
+                                                    <?php echo $button['placeholder']; ?>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="cell large-5 rel-content medium-order-1 small-order-1">
                                 <?php if ($img = get_field('category_featured_image', $term)) : ?>
                                     <?php echo wp_get_attachment_image($img, false, false, array('class' => 'category-section__featured-img stretched-img')); ?>
                                 <?php endif; ?>
@@ -103,7 +115,7 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
+            <?php endif; ?>
             </section>
             <!--END of Category information -->
 
@@ -132,6 +144,6 @@ get_header(); ?>
             </section>
             <!-- END of Archive posts -->
         </div>
-    </div>
 </main>
+
 <?php get_footer(); ?>
