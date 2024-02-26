@@ -22,7 +22,7 @@ get_header(); ?>
                             ?>
                         </h1>
                     </div>
-                    <div class="cell large-8 font-size-200 text-lowercase ">
+                    <div class="cell large-8 font-size-200 text-lowercase">
                         <?php $terms = get_terms([
                             'taxonomy' => 'project-type',
                             'orderby'    => 'id',
@@ -64,7 +64,7 @@ get_header(); ?>
             <section class="category-section cell">
                 <div class="grid-x row-gap-20">
                     <div class="cell">
-                        <div class="grid-x grid-margin-x">
+                        <div class="grid-x grid-margin-x row-gap-15">
                             <div class="cell large-7">
                                 <h3 class="category-section__title font-weight-500 text-uppercase"><?php echo $term->name; ?></h3>
                             </div>
@@ -115,7 +115,7 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
+
             </section>
             <!--END of Category information -->
 
@@ -124,6 +124,13 @@ get_header(); ?>
                 <div class="masonry-grid">
                     <?php $args = array(
                         'post_type' => 'project',
+                        'tax_query' => array(
+                            array (
+                                'taxonomy' => 'project-type',
+                                'field' => 'slug',
+                                'terms' => $term,
+                            )
+                        ),
                         'order' => 'ASC',
                         'orderby' => 'menu_order',
                         'posts_per_page' => -1,
@@ -142,6 +149,7 @@ get_header(); ?>
                     <!-- END of pagination -->
                 </div>
             </section>
+            <?php endif; ?>
             <!-- END of Archive posts -->
         </div>
 </main>
