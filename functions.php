@@ -53,6 +53,7 @@ array_map(function ($file) {
     'theme-customizations',
     'home-slider',
     'projects-slider',
+    'project-slider',
     'svg-support',
     'gravity-form-customizations',
     'custom-fields-search',
