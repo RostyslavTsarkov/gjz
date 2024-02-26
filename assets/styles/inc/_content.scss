@@ -1,6 +1,79 @@
 .main-content {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-block: 50px;
+
+  body.single-project & {
+    padding-top: 20px;
+  }
+
+  .page-title {
+    margin-block: 15px 10px;
+  }
+
+  .scope-cell {
+    max-width: 200px;
+  }
+}
+
+.project-buttons {
+  height: 80%;
+  color: $dark-gunmetal;
+
+  @include breakpoint(medium down) {
+    padding-bottom: 20px;
+  }
+
+  a:hover {
+    background: $lavender;
+  }
+}
+
+.project-content {
+  padding-block: 50px;
+
+  &__column--right {
+    max-width: 350px;
+    padding-inline: 55px;
+    border-left: 1px solid $black-coral;
+
+    @include breakpoint(medium down) {
+      max-width: 100%;
+    }
+
+    @include breakpoint(small down) {
+      padding-inline: 20px;
+    }
+  }
+
+  &__column--left {
+    padding-right: 50px;
+    max-width: 875px;
+
+    @include breakpoint(medium down) {
+      max-width: 100%;
+      padding-right: 0;
+    }
+  }
+
+  h6 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__add-info {
+    * {
+      margin: 0;
+    }
+
+    h6 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 30px;
+      color: $black-coral;
+      font-size: 16px;
+    }
+  }
 }
 
 /* 404 page */
@@ -9,13 +82,13 @@
   padding-bottom: 100px;
 
   .label {
-    background-color: $primary-color;
+    background-color: transparent;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      background-color: darken($primary-color, 8);
-      color: $white;
+      background: $lavender;
+      color: $primary-color;
     }
   }
 }
