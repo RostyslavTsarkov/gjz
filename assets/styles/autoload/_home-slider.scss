@@ -81,6 +81,10 @@
   transition: height 0.3s ease;
   border-bottom: 1px solid $primary-color;
 
+  body.single-project & {
+    border-bottom: none;
+  }
+
   @include breakpoint(medium down) {
     height: 500px;
   }
@@ -94,6 +98,10 @@
 
     position: relative;
     height: 88%;
+
+    body.single-project & {
+      height: 100%;
+    }
   }
 
   &__caption {
