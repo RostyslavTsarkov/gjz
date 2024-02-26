@@ -21,6 +21,10 @@ $slick-arrow-size: 2.75rem;
   top: 45%;
   z-index: 1;
 
+  body.single-project & {
+    top: 50%;
+  }
+
   &::before {
     font-weight: 400;
     font-size: $slick-arrow-size;
@@ -44,6 +48,12 @@ $slick-arrow-size: 2.75rem;
   padding-left: 35px;
   bottom: 18%;
   text-align: start;
+
+  body.single-project & {
+    padding-left: 0;
+    bottom: 3%;
+    text-align: center;
+  }
 
   li {
     margin-right: 10px;
