@@ -9,7 +9,7 @@ get_header(); ?>
     <div class="grid-container">
         <div class="grid-x grid-margin-x">
             <div class="cell">
-                <div class="projects__title-bar grid-x grid-margin-x">
+                <div class="projects__title-bar grid-x grid-margin-x row-gap-20">
                     <div class="cell large-4"">
                         <h1 class="font-weight-800 text-uppercase">
                             <?php if ($title = get_field('projects_archive_title', 'options')) {
