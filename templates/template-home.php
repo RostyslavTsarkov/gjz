@@ -18,7 +18,7 @@ get_header(); ?>
             <div class="font-size-500 font-weight-300 black-coral"><?php the_field('about_description'); ?></div>
         </div>
         <div class="cell">
-            <div class="about__category-list grid-x grid-margin-x grid-margin-y medium-up-3 small-up-1">
+            <div class="about__category-list grid-x grid-margin-x row-gap-20 align-justify medium-align-center">
                 <?php
                 $args = array(
                     'taxonomy'   => 'project-type',
@@ -29,7 +29,7 @@ get_header(); ?>
                 $terms = get_terms($args); ?>
                 <?php if (! empty($terms) && is_array($terms)) :
                     foreach ($terms as $term) : ?>
-                        <article class="cell category-block">
+                        <article class="cell large-auto category-block">
                             <a href="<?php echo esc_url(get_term_link($term)); ?>">
                                 <h6 class="text-lowercase font-size-350 font-weight-700"><?php echo $term->name; ?></h6>
                             </a>
