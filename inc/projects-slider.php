@@ -47,6 +47,8 @@ function featured_projects($atts)
         'order' => 'ASC',
         'orderby' => 'menu_order',
         'posts_per_page' => 5,
+        'meta_key' => 'is_featured_project',
+        'meta_value' => '1',
     ]);
     if ($slider->have_posts()) : ?>
     <div class="grid-container full">
