@@ -223,6 +223,10 @@ img {
   row-gap: rem-calc(30);
 }
 
+.row-gap-60 {
+  row-gap: rem-calc(60);
+}
+
 /* Font */
 .text-uppercase {
   text-transform: uppercase !important;
@@ -233,12 +237,12 @@ img {
 }
 
 /* Text color */
-.roman-silver {
-  color: $roman-silver;
-}
-
 .metallic-silver {
   color: $metallic-silver;
+}
+
+.roman-silver {
+  color: $roman-silver !important;
 }
 
 .black-coral {
@@ -247,6 +251,12 @@ img {
 
 .dark-gunmetal {
   color: $dark-gunmetal;
+}
+
+.medium-align-right {
+  @include breakpoint(medium down) {
+    justify-content: flex-start !important;
+  }
 }
 
 .medium-align-center {
