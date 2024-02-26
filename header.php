@@ -31,19 +31,19 @@
 <!-- BEGIN of header -->
 <header class="header">
     <div class="grid-container menu-grid-container">
-        <div class="grid-x grid-margin-x">
+        <div class="grid-x column-gap-15">
             <div class="large-4 medium-9 small-9 cell large-order-1 medium-order-1 small-order-1">
                 <div class="logo text-center medium-text-left">
                     <div class="grid-x column-gap-35 align-middle">
                         <div class="grid-x align-middle column-gap-20">
                             <?php show_custom_logo(); ?>
-                            <span class="site-title h6 text-uppercase font-weight-900"><?php echo get_bloginfo('name'); ?></span>
+                            <h6 class="site-title text-uppercase font-weight-800"><?php echo get_bloginfo('name'); ?></h6>
                         </div>
                         <span class="site-subtitle font-size-100 text-uppercase metallic-silver"><?php the_field('site_subtitle', 'options'); ?></span>
                     </div>
                 </div>
             </div>
-            <div class="large-6 medium-12 small-12 cell large-order-2 medium-order-3 small-order-3">
+            <div class="large-7 medium-12 small-12 cell large-order-2 medium-order-3 small-order-3">
                 <div class="grid-x align-right medium-align-center">
                     <?php if (has_nav_menu('header-menu')) : ?>
                         <div class="title-bar hide-for-medium" data-responsive-toggle="main-menu" data-hide-for="medium">
@@ -61,7 +61,7 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="large-2 medium-3 small-3 cell large-order-3 medium-order-2 small-order-2">
+            <div class="large-1 medium-3 small-3 cell large-order-3 medium-order-2 small-order-2">
                 <div class="grid-x align-right">
                     <?php if (have_rows('site_languages', 'options')) : ?>
                         <?php while (have_rows('site_languages', 'options')) :
@@ -72,7 +72,7 @@
                                         <?php while (have_rows('languages')) :
                                             the_row(); ?>
                                                 <?php if ('en' == get_sub_field('short_name')) : ?>
-                                                    <span class="font-size-100 font-weight-900 black-coral"><?php the_sub_field('short_name'); ?></span>
+                                                    <span class="font-size-100 font-weight-900 dark-gunmetal"><?php the_sub_field('short_name'); ?></span>
                                                 <?php else : ?>
                                                     <span class="font-size-100 roman-silver"><?php the_sub_field('short_name'); ?></span>
                                                 <?php endif; ?>
