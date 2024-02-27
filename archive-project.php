@@ -49,39 +49,38 @@ get_header(); ?>
                 </div>
             </div>
 
-            <!-- BEGIN of Featured posts slider -->
-            <section class="cell">
-                <?php if (shortcode_exists('projects-slider')) {
-                    echo do_shortcode('[projects-slider]');
-                } ?>
-            </section>
-            <!--END of Featured posts slider -->
+        <!-- BEGIN of Featured posts slider -->
+        <section class="cell">
+            <?php if (shortcode_exists('projects-slider')) {
+                echo do_shortcode('[projects-slider]');
+            } ?>
+        </section>
+        <!--END of Featured posts slider -->
 
-            <!-- BEGIN of Archive posts -->
-            <section class="projects__masonry-grid cell">
-                <div class="masonry-grid">
-                    <?php $args = array(
-                        'post_type' => 'project',
-                        'order' => 'ASC',
-                        'orderby' => 'menu_order',
-                        'posts_per_page' => -1,
-                    );
+        <!-- BEGIN of Archive posts -->
+        <section class="projects__masonry-grid cell">
+            <div class="masonry-grid">
+                <?php $args = array(
+                    'post_type' => 'project',
+                    'order' => 'ASC',
+                    'orderby' => 'menu_order',
+                    'posts_per_page' => -1,
+                );
 
-                    $projects = new WP_Query($args); ?>
+                $projects = new WP_Query($args); ?>
 
-                    <?php if ($projects -> have_posts()) : ?>
-                        <?php while ($projects -> have_posts()) :
-                            $projects -> the_post(); ?>
-                            <?php get_template_part('parts/loop', 'project'); // Project item?>
-                        <?php endwhile; ?>
-                    <?php endif; ?>
-                    <!-- BEGIN of pagination -->
-                    <?php //foundation_pagination(); ?>
-                    <!-- END of pagination -->
-                </div>
-            </section>
-            <!-- END of Archive posts -->
-        </div>
+                <?php if ($projects -> have_posts()) : ?>
+                    <?php while ($projects -> have_posts()) :
+                        $projects -> the_post(); ?>
+                        <?php get_template_part('parts/loop', 'project'); // Project item?>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+                <!-- BEGIN of pagination -->
+                <?php //foundation_pagination(); ?>
+                <!-- END of pagination -->
+            </div>
+        </section>
+        <!-- END of Archive posts -->
     </div>
 </main>
 <?php get_footer(); ?>
