@@ -5,6 +5,7 @@ import './autoload/**/*'; // eslint-disable-line
 import './plugins/lazyload';
 import './plugins/modernizr.min';
 import 'slick-carousel';
+import 'slick-lightbox';
 import 'jquery-match-height';
 import objectFitImages from 'object-fit-images';
 // import '@fancyapps/fancybox/dist/jquery.fancybox.min';
