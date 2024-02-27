@@ -10,6 +10,7 @@ function slider_images($atts)
     ), $atts, 'project-slider');
 
     ob_start();
+
     ?>
     <script type="text/javascript">
         jQuery(document).on('ready', function() {
@@ -22,29 +23,49 @@ function slider_images($atts)
                     dots: true,
                     infinite: true,
                     speed: 500,
-                    autoplay: true,
+                    autoplay: false,
                     pauseOnHover: true,
-                    autoplaySpeed: 5000,
+                    autoplaySpeed: 1000,
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     rows: 0, // Prevent generating extra markup
                     slide: '.slick-slide', // Cause trouble with responsive settings
                 });
+
+                jQuery('#toggle-autoplay').click( function() {
+                    if (jQuery(this).html() == '<i class="fa-solid fa-pause"></i>') {
+                        jQuery('.home-slider').slick('slickPause')
+                        jQuery(this).html('<i class="fa-solid fa-play"></i>')
+                    } else {
+                        jQuery('.home-slider').slick('slickPlay')
+                        jQuery(this).html('<i class="fa-solid fa-pause"></i>')
+                    }
+                });
+
+                jQuery('.home-slider').slickLightbox();
             }
         });
     </script>
 
-    <?php
-    if ($images = get_field('project_slide_images')) : ?>
+    <?php if ($images = get_field('project_slide_images')) : ?>
     <div class="grid-container">
         <div id="home-slider" class="slick-slider home-slider">
             <?php foreach ($images as $image) : ?>
                 <div class="slick-slide home-slide">
-                    <div class="home-slide__inner" <?php bg($image['url']); ?>>
+                    <div class="home-slide__inner single" <?php bg($image['url']); ?>>
+                        <a id="toggle-lightbox" class="slick-button lightbox"
+                           href="<?php echo $image['url']; ?>" target='_blank'>
+                            <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
-        </div><!-- END of  #home-slider-->
+        </div>
+        <div class="rel-content">
+            <div id="toggle-autoplay" class="slick-button autoplay">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
     </div>
     <?php endif;
     wp_reset_query();
