@@ -13,6 +13,7 @@ $slick-arrow-size: 2.75rem;
 
 @import '~slick-carousel/slick/slick.scss';
 @import '~slick-carousel/slick/slick-theme.scss';
+@import '~slick-lightbox/src/styles/slick-lightbox.sass';
 
 /* Arrows */
 .slick-arrow {
@@ -47,11 +48,14 @@ $slick-arrow-size: 2.75rem;
 .slick-dots {
   padding-left: 35px;
   bottom: 18%;
-  text-align: start;
+  text-align: left;
 
   body.single-project & {
+    width: 50%;
     padding-left: 0;
     bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
   }
 
@@ -60,6 +64,7 @@ $slick-arrow-size: 2.75rem;
 
     button {
       &::before {
+        opacity: 1 !important;
         font-weight: 900;
       }
     }
