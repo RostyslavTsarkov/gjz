@@ -9,6 +9,7 @@ get_header(); ?>
 
 <main class="main-content">
     <div class="grid-container">
+        <?php if ($term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'))) : ?>
         <div class="grid-x grid-margin-x">
             <div class="cell">
                 <div class="projects__title-bar grid-x grid-margin-x">
@@ -32,16 +33,21 @@ get_header(); ?>
                         <?php if ($terms) : ?>
                             <ul class="term-list grid-x list-unstyled column-gap-30 align-bottom align-right medium-align-center">
                                 <li>
-                                    <a class="dark-gunmetal"
+                                    <a class="roman-silver"
                                        href="<?php echo get_post_type_archive_link('project'); ?>">
                                         all
                                     </a>
                                 </li>
-                                <?php foreach ($terms as $term) : ?>
+                                <?php foreach ($terms as $local_term) : ?>
                                     <li>
-                                        <a class="roman-silver"
-                                           href="<?php echo esc_url(get_term_link($term)); ?>">
-                                            <?php echo $term->name; ?>
+                                        <?php if ($term == $local_term) :
+                                            $color = 'dark-gunmetal';
+                                        else :
+                                            $color = 'roman-silver';
+                                        endif; ?>
+                                        <a class="<?php echo $color ?>"
+                                           href="<?php echo esc_url(get_term_link($local_term)); ?>">
+                                            <?php echo $local_term->name; ?>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -51,7 +57,6 @@ get_header(); ?>
                 </div>
             </div>
 
-            <?php if ($term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'))) : ?>
             <!-- BEGIN of Featured posts slider -->
             <section class="cell">
                 <?php if (shortcode_exists('projects-slider')) {
@@ -65,10 +70,10 @@ get_header(); ?>
                 <div class="grid-x row-gap-20">
                     <div class="cell">
                         <div class="grid-x grid-margin-x row-gap-15">
-                            <div class="cell large-7">
+                            <div class="cell large-4">
                                 <h3 class="category-section__title font-weight-500 text-uppercase"><?php echo $term->name; ?></h3>
                             </div>
-                            <div class="cell large-5">
+                            <div class="cell large-offset-3 large-5">
                                 <div class="grid-y align-right row-gap-10">
                                     <?php if ($add = get_field('category_additional_information', $term)) : ?>
                                         <div class="cell medium-offset-5 medium-7 font-size-150 font-weight-900">
