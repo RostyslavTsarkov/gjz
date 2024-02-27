@@ -22,21 +22,37 @@ get_header(); ?>
                                 'taxonomy' => 'project-type',
                                 'orderby'    => 'id',
                                 'hide_empty' => false,
+                                'fields' => 'ids',
                             ]); ?>
 
                             <?php if ($terms) : ?>
+                                <?php $post_terms = wp_get_post_terms(get_the_ID(), 'project-type', array('fields' => 'ids')); ?>
+
                                 <ul class="term-list grid-x list-unstyled column-gap-30 align-bottom align-right medium-align-center">
                                     <li>
-                                        <a class="dark-gunmetal"
+                                        <a class="roman-silver"
                                            href="<?php echo get_post_type_archive_link('project'); ?>">
                                             all
                                         </a>
                                     </li>
                                     <?php foreach ($terms as $term) : ?>
                                         <li>
-                                            <a class="roman-silver"
+                                            <?php $is_in_array = false;
+                                            foreach ($post_terms as $local_term) {
+                                                if ($term == $local_term) {
+                                                    $is_in_array = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if ($is_in_array) {
+                                                $color = 'dark-gunmetal';
+                                            } else {
+                                                $color = 'roman-silver';
+                                            } ?>
+                                            <a class="<?php echo $color ?>"
                                                href="<?php echo esc_url(get_term_link($term)); ?>">
-                                                <?php echo $term->name; ?>
+                                                <?php echo get_term($term)->name; ?>
                                             </a>
                                         </li>
                                     <?php endforeach; ?>
@@ -174,7 +190,7 @@ get_header(); ?>
                                         <div class="cell medium-6">
                                             <div class="grid-x align-middle column-gap-20 roman-silver">
                                                 <span class="font-size-200 font-weight-700">SHARE:</span>
-                                                <div><?php get_template_part('parts/socials');?></div>
+                                                <div><?php get_template_part('parts/socials-share');?></div>
                                             </div>
                                         </div>
                                         <div class="cell medium-6">
@@ -216,11 +232,7 @@ get_header(); ?>
                                                 if ($i != count($team)) {
                                                     echo ', ';
                                                 }
-                                                $i++;
-
-                                                //var_dump($i . '' . $member['position']->name . ' ' . $member['full_name']);
-                                                ?>
-
+                                                $i++; ?>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
