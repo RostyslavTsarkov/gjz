@@ -150,6 +150,7 @@ if (class_exists('theme\CreateLazyImg')) {
     );
 }
 
+
 /*********************** PUT YOU FUNCTIONS BELOW *****************************/
 
 // Custom media library's image sizes
@@ -160,4 +161,67 @@ add_image_size('large_high', 1024, 0, false);
 // Disable gutenberg
 add_filter('use_block_editor_for_post_type', '__return_false');
 
+// Remove highlight form blog page when Projects page is open
+function remove_blog_page_classe($classes, $item)
+{
+    if (( is_post_type_archive() || ! is_singular('post') ) && $item->type == 'post_type' && $item->object_id == get_option('page_for_posts')) {
+        $classes = array_diff($classes, array( 'current_page_parent' ));
+    }
+    return $classes;
+}
+
+// Highlight Projects page when open anything with 'project' post type
+function highlight_parent_template_item($classes = array(), $menu_item = false)
+{
+    if ('project' == get_post_type() && 'Projects' == $menu_item->title && !in_array('current_page_parent', $classes)) {
+        $classes[] = 'current_page_parent';
+    }
+    return $classes;
+}
+
+function getShareLink($type, $post_id = false)
+{
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+
+    $url = urlencode(get_permalink($post_id));
+    $title = urlencode(get_the_title($post_id));
+    $share_link = '';
+    switch ($type) {
+        case 'facebook': {
+            $share_link = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
+            break;
+        }
+        case 'twitter': {
+            $share_link = 'https://twitter.com/intent/tweet?url=' . $url . '&text=' . $title;
+            break;
+        }
+        case 'weibo': {
+            $share_link = "http://service.weibo.com/share/share.php?url={$url}&appkey=&title={$title}&pic=&ralateUid=";
+            break;
+        }
+        case 'wechat': {
+            $share_link = "http://api.qrserver.com/v1/create-qr-code/?size=280x280&data={$url}";
+            break;
+        }
+        case 'linkedin': {
+            $share_link = "https://www.linkedin.com/shareArticle?mini=true&url={$url}&title={$title}&summary=&source=";
+            break;
+        }
+        case 'email':
+        {
+            $title = html_entity_decode(strip_tags($title), ENT_QUOTES, 'UTF-8');
+
+            $title_urlencode = rawurlencode($title); //rawurlencode( htmlspecialchars( $title ) );
+            $url_urlencode   = $url; //rawurlencode( htmlspecialchars( $url ) ) ;
+            $share_link      = "https://www.addtoany.com/add_to/email?linkurl=$url_urlencode&linkname=$title_urlencode&linknote=";
+            break;
+        }
+    }
+    return $share_link;
+}
+
+add_filter('nav_menu_css_class', 'remove_blog_page_classe', 10, 2);
+add_filter('nav_menu_css_class', 'highlight_parent_template_item', 10, 2);
 /*****************************************************************************/
