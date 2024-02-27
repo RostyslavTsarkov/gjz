@@ -85,6 +85,11 @@
     border-bottom: none;
   }
 
+  body.tax-project-type &,
+  body.post-type-archive-project & {
+    height: 700px;
+  }
+
   @include breakpoint(medium down) {
     height: 500px;
   }
@@ -106,6 +111,11 @@
 
   &__caption {
     //@include absolute-center;
+    height: 12%;
+
+    .grid-x {
+      height: 100%;
+    }
 
     :hover {
       background: $lavender;
@@ -114,7 +124,23 @@
 
     .slide__post-link {
       height: 100%;
-      padding-block: 25px;
+      padding-right: 15px;
+
+      body.home & {
+        padding-block: 25px;
+
+        @include breakpoint(medium down) {
+          padding-block: 15px;
+        }
+
+        @include breakpoint(small down) {
+          padding-block: 12px;
+        }
+      }
+
+      .grid-x {
+        height: 100%;
+      }
 
       @include breakpoint(medium down) {
         padding-block: 15px;
@@ -133,5 +159,43 @@
         margin-right: 15px;
       }
     }
+  }
+}
+
+.slick-button {
+  height: 40px;
+  width: 40px;
+
+  position: absolute;
+  bottom: 10px;
+  top: auto;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: $dark-gunmetal;
+  background: $lavender;
+  border: 0;
+
+  font-size: 25px;
+  cursor: pointer;
+
+  opacity: 0.8;
+
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+
+  &.autoplay {
+    right: 60px;
+  }
+
+  &.lightbox {
+    right: 10px;
   }
 }
