@@ -40,6 +40,12 @@
 
 .term-list {
   height: 80%;
+
+  li {
+    a:hover {
+      color: $dark-gunmetal !important;
+    }
+  }
 }
 
 /* ---------------------------------------
