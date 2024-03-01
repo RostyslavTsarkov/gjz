@@ -62,26 +62,18 @@
                 </div>
             </div>
             <div class="large-1 medium-3 small-3 cell large-order-3 medium-order-2 small-order-2">
-                <div class="grid-x align-right">
-                    <?php if (have_rows('site_languages', 'options')) : ?>
-                        <?php while (have_rows('site_languages', 'options')) :
-                            the_row() ?>
-                                <ul class="">
-                                    <?php $divider = get_sub_field('divider'); ?>
-                                    <?php if (have_rows('languages')) : ?>
-                                        <?php while (have_rows('languages')) :
-                                            the_row(); ?>
-                                                <?php if ('en' == get_sub_field('short_name')) : ?>
-                                                    <span class="font-size-100 font-weight-900 dark-gunmetal"><?php the_sub_field('short_name'); ?></span>
-                                                <?php else : ?>
-                                                    <span class="font-size-100 roman-silver"><?php the_sub_field('short_name'); ?></span>
-                                                <?php endif; ?>
-                                                <?php if ('zh' != get_sub_field('short_name')) : ?>
-                                                    <span class="font-size-100 roman-silver"><?php echo $divider; ?></span>
-                                                <?php endif; ?>
-                                        <?php endwhile; ?>
-                                    <?php endif; ?>
-                                </ul>
+                <div class="grid-x align-right language-toggle">
+                    <?php if (have_rows('languages', 'options')) : ?>
+                        <?php while (have_rows('languages', 'options')) :
+                            the_row(); ?>
+                                <?php if ('en' == get_sub_field('short_name')) : ?>
+                                    <span class="font-size-100 font-weight-900 dark-gunmetal"><?php the_sub_field('short_name'); ?></span>
+                                <?php else : ?>
+                                    <span class="font-size-100 roman-silver"><?php the_sub_field('short_name'); ?></span>
+                                <?php endif; ?>
+                                <?php if ('zh' != get_sub_field('short_name')) : ?>
+                                    <span class="font-size-100 roman-silver"><?php echo _e("&nbsp;/&nbsp;", 'fwp'); ?></span>
+                                <?php endif; ?>
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>
