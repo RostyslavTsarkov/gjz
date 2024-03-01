@@ -127,36 +127,21 @@ get_header(); ?>
             <!-- BEGIN of Archive posts -->
             <section class="projects__masonry-grid cell">
                 <div class="masonry-grid">
-                    <?php $args = array(
-                        'post_type' => 'project',
-                        'tax_query' => array(
-                            array (
-                                'taxonomy' => 'project-type',
-                                'field' => 'slug',
-                                'terms' => $term,
-                            )
-                        ),
-                        'order' => 'ASC',
-                        'orderby' => 'menu_order',
-                        'posts_per_page' => -1,
-                    );
-
-                    $projects = new WP_Query($args); ?>
-
-                    <?php if ($projects -> have_posts()) : ?>
-                        <?php while ($projects -> have_posts()) :
-                            $projects -> the_post(); ?>
+                    <?php if (have_posts()) : ?>
+                        <?php while (have_posts()) :
+                            the_post(); ?>
                             <?php get_template_part('parts/loop', 'project'); // Project item?>
                         <?php endwhile; ?>
                     <?php endif; ?>
-                    <!-- BEGIN of pagination -->
-                    <?php //foundation_pagination(); ?>
-                    <!-- END of pagination -->
                 </div>
+                <!-- BEGIN of pagination -->
+                <?php foundation_pagination(); ?>
+                <!-- END of pagination -->
             </section>
-            <?php endif; ?>
-            <!-- END of Archive posts -->
+        <?php endif; ?>
+        <!-- END of Archive posts -->
         </div>
+    </div>
 </main>
 
 <?php get_footer(); ?>
