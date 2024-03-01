@@ -26,11 +26,11 @@
                                 </div>
                                 <div class="cell">
                                     <?php if ($phone = get_field('phone', 'options')) : ?>
-                                        <p>Phone: <a href='<?php echo esc_url('tel:'.$phone); ?>'><?php echo $phone ?></a></p>
+                                        <p><?php _e('Phone:&nbsp;', 'fwp'); ?><a href='<?php echo esc_url('tel:'.$phone); ?>'><?php echo $phone ?></a></p>
                                     <?php endif; ?>
 
                                     <?php if ($fax = get_field('fax', 'options')) : ?>
-                                        <p>Fax: <a href='<?php echo esc_url('fax:'.$fax); ?>'><?php echo $fax; ?></a></p>
+                                        <p><?php _e('Fax:&nbsp;', 'fwp'); ?><a href='<?php echo esc_url('fax:'.$fax); ?>'><?php echo $fax; ?></a></p>
                                     <?php endif; ?>
 
                                     <?php if ($email = get_field('email', 'options')) : ?>
@@ -40,11 +40,11 @@
                                 <div class="cell footer__sp">
                                     <?php get_template_part('parts/socials');?>
                                 </div>
-                                <div class="cell">
-                                    <?php if ($icp = get_field('icp', 'options')) : ?>
-                                        <p class="font-weight-300 font-size-100">ICP <?php echo $icp ?></p>
-                                    <?php endif; ?>
-                                </div>
+                                <?php if ($icp = get_field('icp', 'options')) : ?>
+                                    <div class="cell">
+                                        <p class="font-weight-300 font-size-100"><?php echo __('ICP&nbsp;', 'fwp') . $icp ?></p>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

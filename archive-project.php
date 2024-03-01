@@ -32,7 +32,7 @@ get_header(); ?>
                                 <li>
                                     <a class="dark-gunmetal"
                                        href="<?php echo get_post_type_archive_link('project'); ?>">
-                                        all
+                                        <?php _e('all', 'fwp'); ?>
                                     </a>
                                 </li>
                                 <?php foreach ($terms as $term) : ?>
@@ -60,25 +60,17 @@ get_header(); ?>
         <!-- BEGIN of Archive posts -->
         <section class="projects__masonry-grid cell">
             <div class="masonry-grid">
-                <?php $args = array(
-                    'post_type' => 'project',
-                    'order' => 'ASC',
-                    'orderby' => 'menu_order',
-                    'posts_per_page' => -1,
-                );
-
-                $projects = new WP_Query($args); ?>
-
-                <?php if ($projects -> have_posts()) : ?>
-                    <?php while ($projects -> have_posts()) :
-                        $projects -> the_post(); ?>
+                <?php if (have_posts()) : ?>
+                    <?php while (have_posts()) :
+                        the_post(); ?>
                         <?php get_template_part('parts/loop', 'project'); // Project item?>
                     <?php endwhile; ?>
                 <?php endif; ?>
-                <!-- BEGIN of pagination -->
-                <?php //foundation_pagination(); ?>
-                <!-- END of pagination -->
             </div>
+
+            <!-- BEGIN of pagination -->
+            <?php foundation_pagination(); ?>
+            <!-- END of pagination -->
         </section>
         <!-- END of Archive posts -->
     </div>
