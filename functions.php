@@ -222,6 +222,41 @@ function getShareLink($type, $post_id = false)
     return $share_link;
 }
 
+function hwl_archive_projects_pagesize($query)
+{
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('project')) {
+        $number = get_field('projects_posts_per_page', 'options');
+
+        $query->set('order', 'ASC');
+        $query->set('orderby', 'menu_order');
+        $query->set('posts_per_page', $number);
+
+        return;
+    }
+}
+
+function hwl_taxonomy_projects_pagesize($query)
+{
+    if (!is_admin() && $query->is_main_query() && is_tax('project-type')) {
+        $number = get_field('projects_posts_per_page', 'options');
+
+        $query->set('order', 'ASC');
+        $query->set('orderby', 'menu_order');
+        $query->set('posts_per_page', $number);
+        $query->set('tax_query', array (
+            'taxonomy' => 'project-type',
+            'field' => 'slug',
+            'terms' => get_queried_object()->term_id,
+        ));
+
+        return;
+    }
+}
+
+
 add_filter('nav_menu_css_class', 'remove_blog_page_classe', 10, 2);
 add_filter('nav_menu_css_class', 'highlight_parent_template_item', 10, 2);
+
+add_action('pre_get_posts', 'hwl_archive_projects_pagesize', 1);
+add_action('pre_get_posts', 'hwl_taxonomy_projects_pagesize', 1);
 /*****************************************************************************/
