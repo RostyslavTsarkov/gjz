@@ -209,3 +209,9 @@
     }
   }
 }
+
+@include breakpoint(1200px down) {
+  .language-toggle {
+    font-size: 16px;
+  }
+}
