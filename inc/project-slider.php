@@ -43,6 +43,11 @@ function slider_images($atts)
                 });
 
                 jQuery('.home-slider').slickLightbox();
+
+                jQuery('.toggle-lightbox').click( function() {
+                    jQuery('.home-slider').slick('slickPause')
+                    jQuery('#toggle-autoplay').html('<i class="fa-solid fa-play"></i>')
+                })
             }
         });
     </script>
@@ -53,7 +58,7 @@ function slider_images($atts)
             <?php foreach ($images as $image) : ?>
                 <div class="slick-slide home-slide">
                     <div class="home-slide__inner single" <?php bg($image['url']); ?>>
-                        <a id="toggle-lightbox" class="slick-button lightbox"
+                        <a class="toggle-lightbox slick-button lightbox"
                            href="<?php echo $image['url']; ?>" target='_blank'>
                             <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
                         </a>
