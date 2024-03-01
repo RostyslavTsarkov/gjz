@@ -29,6 +29,7 @@ function featured_projects($atts)
                     slidesToScroll: 1,
                     rows: 0, // Prevent generating extra markup
                     slide: '.slick-slide', // Cause trouble with responsive settings
+                    arrows: false,
                 });
             }
         });
