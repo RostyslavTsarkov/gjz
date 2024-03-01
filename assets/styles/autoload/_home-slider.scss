@@ -20,13 +20,15 @@
   }
 
   .slick-prev {
-    //&::before {
-    //}
+    &::before {
+      opacity: 1;
+    }
   }
 
   .slick-next {
-    //&::before {
-    //}
+    &::before {
+      opacity: 1;
+    }
   }
 
   .slick-dots {
