@@ -8,8 +8,8 @@ get_header(); ?>
 
 <main class="main-content">
     <article id="post-<?php the_ID(); ?>" <?php post_class('entry'); ?>>
-        <?php if (have_posts()) : ?>
-            <?php while (have_posts()) :
+        <?php if (have_posts()) :
+            while (have_posts()) :
                 the_post(); ?>
                 <!-- START of categories -->
                 <div class="grid-container">
@@ -18,15 +18,8 @@ get_header(); ?>
                             <h4 class="font-weight-900 text-uppercase metallic-silver "><?php the_field('projects_taxonomy_title', 'options'); ?></h4>
                         </div>
                         <div class="cell large-8 font-size-200 text-lowercase">
-                            <?php $terms = get_terms([
-                                'taxonomy' => 'project-type',
-                                'orderby'    => 'id',
-                                'hide_empty' => false,
-                                'fields' => 'ids',
-                            ]); ?>
-
-                            <?php if ($terms) : ?>
-                                <?php $post_terms = wp_get_post_terms(get_the_ID(), 'project-type', array('fields' => 'ids')); ?>
+                            <?php if ($terms = get_field('project_featured_terms', 'options')) :
+                                $post_terms = wp_get_post_terms(get_the_ID(), 'project-type', array('fields' => 'ids')); ?>
 
                                 <ul class="term-list grid-x list-unstyled column-gap-30 align-bottom align-right medium-align-center">
                                     <li>
@@ -72,15 +65,15 @@ get_header(); ?>
                         <div class="cell large-3">
                             <div class="project-buttons grid-x column-gap-30 font-size-300 font-weight-300 align-bottom align-right">
                                 <?php echo get_previous_post_link(
-                                    $format = '%link',
-                                    $link = '<i>prev project</i>',
+                                    $format = '<i>' . '%link' . '</i>',
+                                    $link = __('prev project', 'fwp'),
                                     $in_same_term = true,
                                     $excluded_terms = '',
                                     $taxonomy = 'project-type'
                                 );
                                 echo get_next_post_link(
-                                    $format = '%link',
-                                    $link = '<i>next project</i>',
+                                    $format = '<i>' . '%link' . '</i>',
+                                    $link = __('next project', 'fwp'),
                                     $in_same_term = true,
                                     $excluded_terms = '',
                                     $taxonomy = 'project-type'
@@ -106,105 +99,111 @@ get_header(); ?>
                                 <div class="cell">
                                     <div class="grid-x row-gap-20">
                                         <div class="cell">
-                                            <h6 class="font-weight-600">THE BASICS</h6>
+                                            <h6 class="font-weight-600"><?php _e('THE BASICS', 'fwp'); ?></h6>
                                         </div>
                                         <div class="cell">
                                             <div class="grid-x column-gap-30 row-gap-20 align-justify medium-align-right font-size-250">
-                                                <div class="">
-                                                    <span class="font-size-200 roman-silver">Client:</span>
-                                                    <br>
-                                                    <span>
-                                                        <?php if ($client = get_field('project_client')) {
-                                                            echo esc_html($client->name);
-                                                        } ?>
-                                                    </span>
-                                                </div>
-                                                <div class="">
-                                                    <span class="font-size-200 roman-silver">When:</span>
-                                                    <br>
-                                                    <?php the_field("project_when"); ?>
-                                                </div>
-                                                <div class="">
-                                                    <span class="font-size-200 roman-silver">Where:</span>
-                                                    <br>
-                                                    <?php if ($locations = get_field('project_where')) :
-                                                        $i = 1; ?>
+                                                <?php if ($clients = get_the_terms(get_the_ID(), 'client')) : ?>
+                                                    <div class="">
+                                                        <span class="font-size-200 roman-silver"><?php _e('Client:', 'fwp'); ?></span>
+                                                        <br>
                                                         <span>
-                                                            <?php $locations = array_reverse($locations);
-                                                            foreach ($locations as $location) :
-                                                                if ($i != 1) {
-                                                                    echo ', ';
+                                                            <?php foreach ($clients as $i => $client) :
+                                                                echo esc_html($client->name);
+                                                                if ($i != count($clients) - 1) {
+                                                                    _e(', ', 'fwp');
                                                                 }
-                                                                echo esc_html($location->name);
-                                                                $i++;
                                                             endforeach; ?>
                                                         </span>
-                                                    <?php endif; ?>
-                                                </div>
-                                                <div class="scope-cell">
-                                                    <span class="font-size-200 roman-silver">Scope:</span>
-                                                    <br>
-                                                    <?php if ($terms = get_the_terms(get_the_ID(), 'project-type')) :
-                                                        $i = 1; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($when = get_field('project_when')) : ?>
+                                                    <div class="">
+                                                        <span class="font-size-200 roman-silver"><?php _e('When:', 'fwp'); ?></span>
+                                                        <br>
+                                                        <span><?php echo $when; ?></span>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($locations = get_the_terms(get_the_ID(), 'location')) : ?>
+                                                    <div class="">
+                                                        <span class="font-size-200 roman-silver"><?php _e('Where:', 'fwp'); ?></span>
+                                                        <br>
                                                         <span>
-                                                            <?php foreach ($terms as $term) :
-                                                                if ($i != 1) {
-                                                                    echo ', ';
+                                                            <?php $locations = array_reverse($locations);
+                                                            foreach ($locations as $i => $location) :
+                                                                echo esc_html($location->name);
+                                                                if ($i != count($locations) - 1) {
+                                                                    _e(', ', 'fwp');
                                                                 }
-                                                                echo esc_html($term->name);
-                                                                $i++;
                                                             endforeach; ?>
-
-                                                    <?php endif; ?>
-                                                </div>
+                                                        </span>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($types = get_the_terms(get_the_ID(), 'project-type')) : ?>
+                                                    <div class="scope-cell">
+                                                        <span class="font-size-200 roman-silver"><?php _e('Scope:', 'fwp'); ?></span>
+                                                        <br>
+                                                        <span>
+                                                            <?php foreach ($types as $i => $type) :
+                                                                echo esc_html($type->name);
+                                                                if ($i != count($types) - 1) {
+                                                                    _e(', ', 'fwp');
+                                                                }
+                                                            endforeach; ?>
+                                                        </span>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($size = get_field('project_size')) : ?>
                                                 <div class="">
-                                                    <span class="font-size-200 roman-silver">Size:</span>
+                                                    <span class="font-size-200 roman-silver"><?php _e('Size:', 'fwp'); ?></span>
                                                     <br>
-                                                    <?php if ($size = get_field('project_size')) : ?>
-                                                        <?php echo number_format($size); ?><span>sqm</span>
-                                                    <?php endif; ?>
+                                                    <span><?php echo number_format($size); ?></span>
+                                                    <span><?php _e('sqm', 'fwp'); ?></span>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cell">
-                                    <div class="grid-x row-gap-30">
-                                        <div class="cell font-size-400 font-weight-300 roman-silver">
-                                            <?php the_field('project_description') ?>
-                                        </div>
-                                        <div class="cell">
-                                            <div class="grid-x medium-align-center">
-                                                <?php if ($button = get_field('project_download_button')) : ?>
-                                                    <a class="button download text-uppercase lotion roman-silver" href="<?php $button['file'] ?>" download>
-                                                    <i class="fa-solid fa-download font-size-400"></i>
-                                                    <?php echo $button['placeholder'] ?>
-                                                </a>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="cell">
+                                    <div class="grid-x row-gap-30">
+                                        <?php if ($description = get_field('project_description')) : ?>
+                                            <div class="cell font-size-400 font-weight-300 roman-silver">
+                                                <?php echo $description; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($button = get_field('project_download_button')) : ?>
+                                        <div class="cell">
+                                            <div class="grid-x medium-align-center">
+                                                <a class="button download text-uppercase lotion roman-silver" href="<?php $button['file'] ?>" download>
+                                                    <i class="fa-solid fa-download font-size-400"></i>
+                                                    <?php echo $button['placeholder'] ?>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="cell">
                                     <div class="grid-x row-gap-20">
                                         <div class="cell medium-6">
                                             <div class="grid-x align-middle column-gap-20 roman-silver">
-                                                <span class="font-size-200 font-weight-700">SHARE:</span>
+                                                <span class="font-size-200 font-weight-700"><?php _e('SHARE:', 'fwp'); ?></span>
                                                 <div><?php get_template_part('parts/socials-share');?></div>
                                             </div>
                                         </div>
                                         <div class="cell medium-6">
                                             <div class="project-buttons grid-x column-gap-30 font-size-300 font-weight-300 align-bottom align-right">
                                                 <?php echo get_previous_post_link(
-                                                    $format = '%link',
-                                                    $link = '<i>prev project</i>',
+                                                    $format = '<i>' . '%link' . '</i>',
+                                                    $link = __('prev project', 'fwp'),
                                                     $in_same_term = true,
                                                     $excluded_terms = '',
                                                     $taxonomy = 'project-type'
                                                 );
                                                 echo get_next_post_link(
-                                                    $format = '%link',
-                                                    $link = '<i>next project</i>',
+                                                    $format = '<i>' . '%link' . '</i>',
+                                                    $link = __('next project', 'fwp'),
                                                     $in_same_term = true,
                                                     $excluded_terms = '',
                                                     $taxonomy = 'project-type'
@@ -222,17 +221,15 @@ get_header(); ?>
                                         <?php echo $add_info; ?>
                                     </div>
                                 <?php endif; ?>
-                                <?php if ($team = get_field('project_team')) :
-                                    $i = 1; ?>
+                                <?php if ($team = get_field('project_team')) : ?>
                                     <div class="cell roman-silver">
-                                        <h6 class="">THE TEAM</h6>
-                                        <?php foreach ($team as $member) : ?>
+                                        <h6><?php _e('THE TEAM', 'fwp'); ?></h6>
+                                        <?php foreach ($team as $i => $member) : ?>
                                             <div class="font-size-250 font-weight-300">
                                                 <?php echo esc_html($member['position']->name) . '. ' . esc_html($member['full_name']);
-                                                if ($i != count($team)) {
+                                                if ($i != count($team) - 1) {
                                                     echo ', ';
-                                                }
-                                                $i++; ?>
+                                                } ?>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
